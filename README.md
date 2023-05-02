@@ -11,7 +11,8 @@ Docker, uygulamaları birleştirmek, test etmek ve dağıtmak için açık kayna
 Docker içerisinde çalışan uygulamaları container olarak adlandırıyoruz.
 Bir container içerisinde çalışan uygulama diğer container içerisinde çalışan uygulamalardan etkilenmez. Containerlar aslında birer sanal makina gibi çalışır fakat sanal makinadan farklı olarak containerlar birbirinden izole edilmiş bir şekilde çalışır ve sanal makinadan daha hafiftir.
 
-**Docker'ın çalışma mantığı şu şekildedir:**
+<details>
+<summary>Docker'ın çalışma mantığı şu şekildedir</summary>
 
 - **Docker Engine:** Docker'ın çalışması için gerekli olan tüm bileşenleri içerir. Docker Engine, Docker Daemon ve Docker Client'tan oluşur.
   
@@ -30,6 +31,9 @@ Bir container içerisinde çalışan uygulama diğer container içerisinde çal�
 - **Docker Compose:** Docker Compose, birden fazla container'ın tek bir komut ile oluşturulmasını ve yönetilmesini sağlar.
 
 - **Docker Swarm:** Docker Swarm, birden fazla Docker Host'un tek bir Docker Host gibi yönetilmesini sağlar.
+
+</details>
+<br>
 
 # Dockerfile içerisinde kullanılan komutlar:
 

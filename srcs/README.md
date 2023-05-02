@@ -18,7 +18,8 @@ docker-compose --version
 
 Docker-Compose kullanımı için öncelikle bir docker-compose.yml dosyası oluşturulmalıdır. Bu dosya içerisinde container'ların nasıl oluşturulacağı, container'lar arasında nasıl bağlantı kurulacağı gibi bilgiler bulunur. Docker-Compose ile ilgili tüm komutlar docker-compose.yml dosyasının bulunduğu dizinde çalıştırılmalıdır.
 
-Docker-Compose ile ilgili tüm komutlar aşağıdaki gibidir:
+<details>
+<summary>Docker-Compose ile ilgili bazı temel komutlar</summary>
 
 ```bash
 docker-compose up # docker-compose.yml dosyasındaki tüm container'ları ayağa kaldırır.
@@ -75,4 +76,41 @@ docker-compose push # docker-compose.yml dosyasındaki container'ların image'la
 
 docker-compose create # docker-compose.yml dosyasındaki container'ları oluşturur.
 ```
+</details>
+<br>
+
+# .yml Dosyası Nedir?
+
+.yml dosyası, YAML (Yet Another Markup Language) formatında yazılmış dosyalardır. YAML, insanların okuyup yazması kolay olan bir veri serileştirme formatıdır. YAML, XML ve JSON formatlarına benzer. YAML, XML ve JSON formatlarına göre daha kolay okunabilir ve yazılabilir. YAML formatında yazılmış dosyaların uzantısı .yml veya .yaml'dır. Docker-Compose ile ilgili tüm yapılandırma dosyaları .yml uzantılıdır.
+
+# Docker-compose.yml İçerisinde Komutlar Ne Anlama Gelmektedir?
+
+<details>
+<summary>VERSION</summary>
+docker-compose.yml içerisinde yer alan 'version' anahtar kelimesi, docker-compose.yml dosyasının hangi versiyon ile yazıldığını belirtir. Docker-Compose ile ilgili yapılandırma dosyaları her sürümde değişiklik gösterebilir. Bu yüzden docker-compose.yml dosyasının hangi versiyon ile yazıldığını belirtmek önemlidir. Docker-Compose ile ilgili yapılandırma dosyaları için kullanılabilecek versiyonlar aşağıdaki gibidir.
+
+```bash
+version: "3.8"	# 19.03.0+
+version: "3.7"	# 18.06.0+
+version: "3.6"	# 18.02.0+
+version: "3.5"	# 17.12.0+
+version: "3.4"	# 17.09.0+
+version: "3.3"	# 17.06.0+
+version: "3.2"	# 17.04.0+
+version: "3.1"	# 1.13.1+
+version: "3.0"	# 1.13.0+
+version: "2.4"	# 17.12.0+
+version: "2.3"	# 17.06.0+
+version: "2.2"	# 1.13.0+
+version: "2.1"	# 1.12.0+
+version: "2.0"	# 1.10.0+
+```
+</details>
+
+<details>
+<summary>SERVICES</summary>
+docker
+</details>
+
+
 

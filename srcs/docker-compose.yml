@@ -12,14 +12,14 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/buyildir/data/wordpress
+      device: /home/wordpress
   db:
     driver: local
     name: db
     driver_opts:
       type: none
       o: bind
-      device: /home/buyildir/data/mariadb
+      device: /home/mariadb
 
 services:
   mariadb:

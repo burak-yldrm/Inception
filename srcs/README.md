@@ -89,7 +89,7 @@ docker-compose create # docker-compose.yml dosyasındaki container'ları oluştu
 <summary>VERSION</summary>
 docker-compose.yml içerisinde yer alan 'version' anahtar kelimesi, docker-compose.yml dosyasının hangi versiyon ile yazıldığını belirtir. Docker-Compose ile ilgili yapılandırma dosyaları her sürümde değişiklik gösterebilir. Bu yüzden docker-compose.yml dosyasının hangi versiyon ile yazıldığını belirtmek önemlidir. Docker-Compose ile ilgili yapılandırma dosyaları için kullanılabilecek versiyonlar aşağıdaki gibidir.
 
-```bash
+```yml
 version: "3.8"	# 19.03.0+
 version: "3.7"	# 18.06.0+
 version: "3.6"	# 18.02.0+
@@ -109,8 +109,78 @@ version: "2.0"	# 1.10.0+
 
 <details>
 <summary>SERVICES</summary>
-docker
+'services' özelliği, Docker Compose dosyasında tanımlanan her bir öğenin, birbirleriyle etkileşim kurmasını sağlayan bir servis olarak çalışmasını sağlar.<br>
+Bir Docker Compose dosyası, birden fazla bağımsız öğeyi tek bir projede birleştirebilir. Örneğin, bir web uygulaması için, dosya içinde birden fazla hizmet tanımlayabiliriz, biri web sunucusu, diğeri veritabanı sunucusu ve diğerleri olabilir. Bu hizmetlerin her biri, Docker Compose tarafından birbirleriyle koordine edilerek uygulamanın çalışmasını sağlar.<br>
+Her bir servis, özel ayarlarla tanımlanır ve ardından Docker Compose, belirtilen ayarları kullanarak her bir servisin Docker konteynerini oluşturur. Bu sayede, tüm projeyi tek bir komutla çalıştırabilir, her bir servisi ayrı ayrı başlatmakla uğraşmamız gerekmez.<br>
+Servisler, Docker Compose dosyasında "services" anahtar kelimesiyle tanımlanır ve her bir servis, adı, konteynerin ayarları, ağ bağlantıları vb. gibi ayrıntılı bilgiler içeren bir liste şeklinde belirtilir.<br><br>
+Örnek bir servis tanımı aşağıdaki gibidir:
+
+```yml
+services:
+  web:
+	build: . # Dockerfile dosyasının bulunduğu dizin
+	ports: # container'ın portlarını host'a yönlendirir
+	  - "5000:5000" # container'ın 5000 portunu host'un 5000 portuna yönlendirir
+	volumes: # container'ın dizinlerini host'un dizinlerine bağlar
+	  - .:/code # container'ın /code dizinini host'un . dizinine bağlar
+	  - logvolume01:/var/log # container'ın /var/log dizinini host'un logvolume01 dizinine bağlar
+	links: # container'ın redis servisine bağlanmasını sağlar
+	  - redis # redis servisini bağlar
+  redis: # redis servisi
+	image: redis # redis image'ını kullanarak redis servisini oluşturur
+```
+
+Burada "web" ve "redis" adında iki servis tanımlanmıştır. "web" servisi, Dockerfile dosyası içerisindeki ayarlar kullanılarak oluşturulurken, "redis" servisi, Docker Hub üzerindeki "redis" image'ı kullanılarak oluşturulur.
 </details>
 
+<details>
+<summary>NETWORKS</summary>
+'networks' bölümü, container'ların birbirleriyle veya dış dünya ile nasıl iletişim kuracaklarını tanımlayan bir bölümdür. Bu bölümde, farklı network modları (bridge, host, overlay vb.) ve her bir container için ayrı ayrı tanımlanabilecek özel network'ler bulunur.<br><br>
+Docker Compose'da tanımlanmış bir network, aynı proje içindeki container'lar tarafından paylaşılabilir. Bu sayede, container'lar arasındaki iletişim daha kolay bir şekilde sağlanabilir ve network'ün özellikleri (DNS, IP adresleri, port mapping vb.) tek bir yerden yönetilebilir.<br><br>Örnek bir network tanımı aşağıdaki gibidir:
 
+```yml
+version: "3.9" # docker-compose.yml dosyasının versiyonu
+services: # servisler
+  web: # web servisi
+    image: nginx:latest # nginx image'ını kullanarak nginx servisini oluşturur
+    networks: # network'ler
+      - my-network
+  db: # db servisi
+    image: postgres:latest # postgres image'ını kullanarak postgres servisini oluşturur
+    networks: # network'ler
+      - my-network
+networks: # network'ler
+  my-network: # my-network adında bir network oluşturur
+    driver: bridge # bridge modunda bir network oluşturur. 'bridge' sürücüsü, Docker'ın yerel ağıdır. Bu, Docker konteynerleri arasında iletişim kurmalarını sağlayan varsayılan bir ağdır.
+```
 
+</details>
+
+<details>
+<summary>VOLUMES</summary>
+'volumes', Docker container'larının kullanabileceği disk alanını sağlamak için kullanılan bir mekanizmadır. Docker container'ları çalıştırılırken, disk alanı ihtiyaçları host işletim sisteminden karşılanır. Ancak bu, verilerin container'lar arasında veya host makine ile container'lar arasında taşınması, yönetilmesi ve korunması zorluğu yaratabilir.<br><br>
+Docker volumes, container'ların kullanabileceği özel bir disk alanı sağlayarak, verilerin container'lar arasında veya host ile container'lar arasında daha kolay taşınmasını, yönetilmesini ve korunmasını sağlar. Bu disk alanları, container'lar arasında paylaşılabileceği gibi, container'a özgü olacak şekilde de ayarlanabilir.<br><br>
+Örneğin, bir web uygulaması container'ının konfigürasyon dosyaları, log dosyaları veya veritabanı dosyaları Docker volume'leri ile yönetilebilir. Bu sayede, bu verilerin container'dan bağımsız olarak saklanabilmesi, yönetilebilmesi ve korunabilmesi sağlanır.<br><br>Örnek bir volume tanımı aşağıdaki gibidir:
+
+```yml
+version: "3.9" # docker-compose.yml dosyasının versiyonu
+
+services: # servisler
+  web: # web servisi
+    image: nginx:latest # nginx image'ını kullanarak nginx servisini oluşturur
+    volumes: # volume'ler
+      - app-code:/usr/share/nginx/html # container'ın /usr/share/nginx/html dizinini app-code volume'üne bağlar
+      - app-data:/data # container'ın /data dizinini app-data volume'üne bağlar
+
+volumes: # volume'ler
+  app-code: # app-code adında bir volume oluşturur
+  app-data: # app-data adında bir volume oluşturur
+``` 
+
+**NOT:** **'volumes'** anahtar kelimesi, Docker konteynerlerindeki dosya ve dizinlerin, Docker ana makinesi üzerindeki nereye monte edileceğini belirlemek için kullanılır. Volumes tanımlandığında, Docker Compose tarafından belirtilmeyen bir konumda, örn. **'/var/lib/docker/volumes'** altında saklanır.
+
+Yukarıdaki örnekte, **'app-code'** ve **'app-data'** adlı iki farklı volume tanımlanmıştır. Bu iki volume'un Docker ana makinesindeki tam yolu, varsayılan olarak **'/var/lib/docker/volumes/<proje_adı>_app-code'** ve **'/var/lib/docker/volumes/<proje_adı>_app-data'** şeklindedir. Burada **'<proje_adı>'**, Docker Compose projesinin adıdır. Örneğin, Docker Compose projesi adı "myproject" ise, **'app-code'** volumes'unun tam yolu **'/var/lib/docker/volumes/myproject_app-code'** olacaktır.
+</details>
+<br>
+
+**NOT: Bunlar tamamı ile yüzeyde kalmış örnekler ve açıklamalardır. Docker Compose hakkında daha detaylı bilgi almak için [Docker Compose Resmi Dokümantasyonu](https://docs.docker.com/compose/) incelenebilir.**

@@ -22,7 +22,7 @@ Bir **'.dockerignore**' dosyası oluşturduktan sonra, Dockerfile dosyanızda **
 <details>
 <summary>Dockerfile İçeriği</summary>
 
-```config
+```dockerfile
 FROM debian:buster # Kurulacak işletim sistemi
 
 RUN apt-get update && apt-get install -y mariadb-server # Sistemde yer alan paketlerin güncellenmesi ve mariadb-server paketinin kurulması..

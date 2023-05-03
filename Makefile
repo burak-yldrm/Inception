@@ -2,7 +2,9 @@
 # -q: --quiet
 # -a: --all
 # $$: escape $ for shell
-all: 
+all:
+	@mkdir -p /home/wordpress
+	@mkdir -p /home/mariadb
 	@docker-compose -f ./srcs/docker-compose.yml up
 
 down:

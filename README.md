@@ -143,4 +143,4 @@ Temel olarak Docker, Container ve Dockerfile hakkında ki bilgiler bu kadar. Pro
 
 # Projeyi Nasıl Çalıştırabilirim?
 
-...
+[YouTube](https://www.youtube.com/watch?v=BjbhxtUjkhg&feature=youtu.be)

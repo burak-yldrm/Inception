@@ -96,7 +96,7 @@ Bir container içerisinde çalışan uygulama diğer container içerisinde çal�
 			ENTRYPOINT ["executable", "param1", "param2"]
 			```
 
-			- Bu kullanım şeklinde container başlatıldığında executable dosyası çalıştırılır ve param1 ve param2 parametreleri ile çalıştırılır.
+			- Bu kullanım şeklinde container başlatıldığında executable dosyası param1 ve param2 parametreleri ile çalıştırılır.
 
 		- ```dockerfile
 			ENTRYPOINT command param1 param2
@@ -109,14 +109,14 @@ Bir container içerisinde çalışan uygulama diğer container içerisinde çal�
 			CMD ["param1", "param2"]
 			```
 
-			- Bu kullanım şeklinde container başlatıldığında executable dosyası çalıştırılır ve param1 ve param2 parametreleri ile çalıştırılır. Eğer container başlatılırken parametre belirtilmezse CMD komutu ile belirtilen parametreler ile çalıştırılır.
+			- Bu kullanım şeklinde container başlatıldığında executable dosyası param1 ve param2 parametreleri ile çalıştırılır. Eğer container başlatılırken parametre belirtilmezse CMD komutu ile belirtilen parametreler ile çalıştırılır.
 
 		- ```dockerfile
 			ENTRYPOINT command param1 param2
 			CMD param1 param2
 			```
 
-			- Bu kullanım şeklinde container başlatıldığında command komutu çalıştırılır ve param1 ve param2 parametreleri ile çalıştırılır. Eğer container başlatılırken parametre belirtilmezse CMD komutu ile belirtilen parametreler ile çalıştırılır. <br><br>
+			- Bu kullanım şeklinde container başlatıldığında command komutu param1 ve param2 parametreleri ile çalıştırılır. Eğer container başlatılırken parametre belirtilmezse CMD komutu ile belirtilen parametreler ile çalıştırılır. <br><br>
 
 - **CMD:** CMD komutu, Docker imajı çalıştırıldığında otomatik olarak başlatılacak olan komutu tanımlar. Eğer kullanıcı Docker imajını çalıştırdığında, komut belirtilmemişse CMD komutu ile belirlenen varsayılan komut çalıştırılır. Eğer kullanıcı Docker imajını çalıştırırken bir komut belirtirse, o komut varsayılan komut yerine çalıştırılır. CMD komutu, Dockerfile içinde sadece bir kere kullanılabilir ve Dockerfile içinde birden fazla CMD tanımlandığında, yalnızca en son tanım geçerli olur.
 

@@ -128,6 +128,9 @@ services:
 	  - redis # redis servisini bağlar
   redis: # redis servisi
 	image: redis # redis image'ını kullanarak redis servisini oluşturur
+  restart: # restart servisi
+	Container'ı yeniden başlatmaya yarayan servistir. Temelde dört farklı yeniden başlatma politikası vardır.
+	Bu projede kullanılan "unless-stopped" container her hangi bir şekilde elle müdahale edilmeden durduğunda her zaman yeniden başlatır.
 ```
 
 Burada "web" ve "redis" adında iki servis tanımlanmıştır. "web" servisi, Dockerfile dosyası içerisindeki ayarlar kullanılarak oluşturulurken, "redis" servisi, Docker Hub üzerindeki "redis" image'ı kullanılarak oluşturulur.

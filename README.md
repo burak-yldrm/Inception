@@ -2,6 +2,15 @@
 
 Kaynak: [Docker](https://docs.docker.com/) [Wikipedia](https://en.wikipedia.org/wiki/Docker_(software))
 
+**DEĞİŞMESİ GEREKEN YERLER:**
+- .env --> srcs/
+- wp-config.php --> srcs/requirements/wordpress/tools
+- ngnix_start.sh --> srcs/requirements/nginx/tools
+- default --> srcs/requirements/nginx/conf
+- initial_db.sql --> srcs/requirements/mariadb/tools
+
+**NOT:** Tarayıcınız üzerinden domain adresine erişmek için bu yazının sonunda ki **Projeyi Nasıl Çalıştırabilirim?** kısmında yer alan YouTube linkini inceleyebilirsiniz.
+
 # Docker Nedir?
 
 ![Docker Logo](https://github.com/burak-yldrm/Inception/blob/main/img/1920px-Docker_(container_engine)_logo.svg.png)

@@ -2,6 +2,8 @@
 
 Kaynak: [Docker](https://docs.docker.com/) [Wikipedia](https://en.wikipedia.org/wiki/Docker_(software))
 
+Kurulum: [YouTube](https://www.youtube.com/watch?v=BjbhxtUjkhg&feature=youtu.be)
+
 **DEĞİŞMESİ GEREKEN YERLER:**
 - .env --> srcs/
 - wp-config.php --> srcs/requirements/wordpress/tools
